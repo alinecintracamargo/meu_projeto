@@ -1,12 +1,38 @@
-# lib/meu_projeto/event_planner/task_organizer.rb
 
-class TaskOrganizer
-  def initialize(participants, tasks)
-    @participants = participants
-    @tasks = tasks
+
+module TaskOrganizer
+  def self.update_task_status(participants, participants_name, status)
+    participants.each do |participant|
+      if participant.name == participants_name 
+        participant.task_status = status
+      end
+    end
   end
 
-  def organize_tasks(event_date)
+
+  def choose_order
+    ordered_participants = []
+    available_participants = @participants.dup
+
+    until available_participants.empty?
+      puts "Escolha a próxima família para selecionar a tarefa:"
+      available_participants.each_with_index do |participant, index|
+        puts "#{index + 1}. #{participant.name}"
+      end
+
+      choice = gets.chomp.to_i - 1
+
+      if choice >= 0 && choice < available_participants.length
+        ordered_participants << available_participants.delete_at(choice)
+      else
+        puts "Escolha inválida. Tente novamente."
+      end
+    end
+
+    @participants = ordered_participants
+  end
+
+  def organize_tasks
     # Verifica se há participantes e tarefas
     if @participants.empty? || @tasks.empty?
       puts "Não há participantes ou tarefas para organizar."
@@ -31,9 +57,16 @@ class TaskOrganizer
 
     # Exibe as tarefas organizadas
     display_tasks
+  end
 
-    # Retorna a data do evento
-    event_date
+  def update_task_status
+    @participants.each do |participant|
+      puts "#{participant.name}, por favor atualize o status da sua tarefa (pendente, em andamento, concluída):"
+      status = gets.chomp.downcase
+      participant.update_task_status(status)
+    end
+
+    display_task_statuses
   end
 
   private
@@ -51,7 +84,14 @@ class TaskOrganizer
   def display_tasks
     puts "Resumo das escolhas:"
     @participants.each do |participant|
-      puts "#{participant.name} escolheu: #{participant.task}"
+      puts "#{participant.name} escolheu: #{participant.task} (Status: #{participant.task_status})"
+    end
+  end
+
+  def display_task_statuses
+    puts "Atualização de status das tarefas:"
+    @participants.each do |participant|
+      puts "#{participant.name} - Tarefa: #{participant.task} - Status: #{participant.task_status}"
     end
   end
 end

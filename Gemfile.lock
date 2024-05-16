@@ -2,6 +2,7 @@ GEM
   remote: https://rubygems.org/
   specs:
     date (3.3.4)
+    diff-lcs (1.5.1)
     mail (2.8.1)
       mini_mime (>= 0.1.1)
       net-imap
@@ -17,6 +18,19 @@ GEM
       timeout
     net-smtp (0.5.0)
       net-protocol
+    rspec (3.13.0)
+      rspec-core (~> 3.13.0)
+      rspec-expectations (~> 3.13.0)
+      rspec-mocks (~> 3.13.0)
+    rspec-core (3.13.0)
+      rspec-support (~> 3.13.0)
+    rspec-expectations (3.13.0)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-mocks (3.13.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.13.0)
+    rspec-support (3.13.1)
     timeout (0.4.1)
 
 PLATFORMS
@@ -25,6 +39,7 @@ PLATFORMS
 
 DEPENDENCIES
   mail
+  rspec
 
 BUNDLED WITH
    2.5.9

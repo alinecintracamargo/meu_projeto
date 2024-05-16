@@ -1,4 +1,3 @@
-# lib/meu_projeto/event_planner/event_reminder.rb
 
 class EventReminder
   def initialize(participants)

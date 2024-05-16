@@ -8,3 +8,8 @@ source "https://rubygems.org"
 source 'https://rubygems.org'
 
 gem 'mail'
+
+# Gemfile
+group :test do
+  gem 'rspec'
+end
